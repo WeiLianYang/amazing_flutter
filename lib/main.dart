@@ -36,9 +36,27 @@ class _RandomWordsState extends State<RandomWords> {
         title: const Text('Startup Name Generator'),
         actions: <Widget>[
           new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
+          new IconButton(icon: const Icon(Icons.category), onPressed: _category)
         ],
       ),
       body: _buildSuggestions(),
+    );
+  }
+
+  // test route category
+  void _category() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return new Scaffold(
+            appBar: new AppBar(title: const Text('Category Page')),
+            body: const Center(
+                child: Text(
+                    "Test category page,\ncustom route,\ntext align center !!!",
+                    textAlign: TextAlign.center)),
+          );
+        },
+      ),
     );
   }
 
@@ -78,6 +96,7 @@ class _RandomWordsState extends State<RandomWords> {
         // 在偶数行，该函数会为单词对添加一个 ListTile row，
         // 在奇数行，该函数会添加一个分割线的 widget，来分隔相邻的词对。
         // 注意，在小屏幕上，分割线看起来可能比较吃力。
+        // itemCount: 20, // 如果不指定数量，无限滚动列表
         itemBuilder: (context, i) {
           // 在每一列之前，添加一个1像素高的分隔线 widget。
           if (i.isOdd) return Divider();
