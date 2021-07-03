@@ -1,6 +1,9 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
+import 'animation.dart';
+import 'list_view.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -36,10 +39,36 @@ class _RandomWordsState extends State<RandomWords> {
         title: const Text('Startup Name Generator'),
         actions: <Widget>[
           new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
-          new IconButton(icon: const Icon(Icons.category), onPressed: _category)
+          new IconButton(
+              icon: const Icon(Icons.category), onPressed: _category),
+          new IconButton(
+              icon: const Icon(Icons.animation), onPressed: _animationFade),
+          new IconButton(icon: const Icon(Icons.list_alt), onPressed: _listAlt)
         ],
       ),
       body: _buildSuggestions(),
+    );
+  }
+
+  // test route animation
+  void _animationFade() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return MyFadeTest(title: 'Fade Demo');
+        },
+      ),
+    );
+  }
+
+  // test route animation
+  void _listAlt() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return SampleAppPage();
+        },
+      ),
     );
   }
 
