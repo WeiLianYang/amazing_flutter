@@ -1,3 +1,4 @@
+import 'package:amazing_flutter/sample_main.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
@@ -43,10 +44,23 @@ class _RandomWordsState extends State<RandomWords> {
               icon: const Icon(Icons.category), onPressed: _category),
           new IconButton(
               icon: const Icon(Icons.animation), onPressed: _animationFade),
-          new IconButton(icon: const Icon(Icons.list_alt), onPressed: _listAlt)
+          new IconButton(icon: const Icon(Icons.list_alt), onPressed: _listAlt),
+          new IconButton(
+              icon: const Icon(Icons.confirmation_number), onPressed: _number)
         ],
       ),
       body: _buildSuggestions(),
+    );
+  }
+
+  // test route animation
+  void _number() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return MyHomePage(title: 'Flutter Demo Home Page');
+        },
+      ),
     );
   }
 
