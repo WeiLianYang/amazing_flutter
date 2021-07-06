@@ -1,8 +1,8 @@
 import 'package:amazing_flutter/sample_main.dart';
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 import 'animation.dart';
+import 'first_flutter_app.dart';
 import 'list_view.dart';
 
 void main() {
@@ -14,47 +14,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Widget List',
       theme: new ThemeData(
         primaryColor: Colors.white,
       ),
-      home: RandomWords(),
+      home: ListWidget(),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
+class ListWidget extends StatefulWidget {
   @override
-  _RandomWordsState createState() => _RandomWordsState();
+  _ListWidgetState createState() => _ListWidgetState();
 }
 
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _saved = new Set<WordPair>();
+class ListItemBean {
+  final String name;
+  final int type;
+
+  ListItemBean(this.name, this.type);
+}
+
+class _ListWidgetState extends State<ListWidget> {
+  final _itemList = <ListItemBean>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
   Widget build(BuildContext context) {
+    _itemList.add(ListItemBean("sample 1", 1));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 2", 2));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 3", 3));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 4", 4));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 5", 5));
+    _itemList.add(ListItemBean("divider", 0));
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Startup Name Generator'),
-        actions: <Widget>[
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
-          new IconButton(
-              icon: const Icon(Icons.category), onPressed: _category),
-          new IconButton(
-              icon: const Icon(Icons.animation), onPressed: _animationFade),
-          new IconButton(icon: const Icon(Icons.list_alt), onPressed: _listAlt),
-          new IconButton(
-              icon: const Icon(Icons.confirmation_number), onPressed: _number)
-        ],
-      ),
-      body: _buildSuggestions(),
-    );
+        appBar: AppBar(title: const Text('Widget List')), body: _buildList());
   }
 
-  // test route animation
-  void _number() {
+  void _sample1() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -64,8 +65,7 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  // test route animation
-  void _animationFade() {
+  void _sample2() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -75,8 +75,7 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  // test route animation
-  void _listAlt() {
+  void _sample3() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -86,8 +85,7 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  // test route category
-  void _category() {
+  void _sample4() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -103,76 +101,42 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  void _pushSaved() {
+  void _sample5() {
     Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final Iterable<ListTile> tiles = _saved.map(
-            (WordPair pair) {
-              return new ListTile(
-                title: new Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-          final List<Widget> divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-          return new Scaffold(
-            appBar: new AppBar(
-              title: const Text('Saved Suggestions'),
-            ),
-            body: new ListView(children: divided),
-          );
-        },
-      ),
+      new MaterialPageRoute<void>(builder: (BuildContext context) {
+        return FirstFlutterApp();
+      }),
     );
   }
 
-  Widget _buildSuggestions() {
+  Widget _buildList() {
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
-        // 对于每个建议的单词对都会调用一次 itemBuilder，然后将单词对添加到 ListTile 行中。
-        // 在偶数行，该函数会为单词对添加一个 ListTile row，
-        // 在奇数行，该函数会添加一个分割线的 widget，来分隔相邻的词对。
-        // 注意，在小屏幕上，分割线看起来可能比较吃力。
-        // itemCount: 20, // 如果不指定数量，无限滚动列表
-        itemBuilder: (context, i) {
-          // 在每一列之前，添加一个1像素高的分隔线 widget。
-          if (i.isOdd) return Divider();
-          // 语法 i ~/ 2 表示 i 除以 2，但返回值是整形（向下取整），
-          // 比如 i 为：1, 2, 3, 4, 5 时，结果为 0, 1, 1, 2, 2，这个可以计算出 ListView 中减去分隔线后的实际单词对数量。
-          final index = i ~/ 2;
-          if (index >= _suggestions.length) {
-            // 如果是建议列表中最后一个单词对，接着再生成10个单词对，然后添加到建议列表。
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_suggestions[index]);
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          if (index.isOdd) return Divider();
+          return _buildRow(_itemList[index]);
         });
   }
 
-  Widget _buildRow(WordPair pair) {
-    final bool alreadySaved = _saved.contains(pair);
+  Widget _buildRow(ListItemBean itemBean) {
     return ListTile(
       title: Text(
-        pair.asPascalCase,
+        itemBean.name,
         style: _biggerFont,
       ),
-      trailing: new Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null,
-      ),
       onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
+        if (itemBean.type == 1) {
+          _sample1();
+        } else if (itemBean.type == 2) {
+          _sample2();
+        } else if (itemBean.type == 3) {
+          _sample3();
+        } else if (itemBean.type == 4) {
+          _sample4();
+        } else if (itemBean.type == 5) {
+          _sample5();
+        }
       },
     );
   }

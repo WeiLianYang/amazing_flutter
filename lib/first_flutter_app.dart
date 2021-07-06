@@ -1,15 +1,11 @@
-import 'package:amazing_flutter/sample_main.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
-import 'animation.dart';
-import 'list_view.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(FirstFlutterApp());
 }
 
-class MyApp extends StatelessWidget {
+class FirstFlutterApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -39,67 +35,10 @@ class _RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: const Text('Startup Name Generator'),
         actions: <Widget>[
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
-          new IconButton(
-              icon: const Icon(Icons.category), onPressed: _category),
-          new IconButton(
-              icon: const Icon(Icons.animation), onPressed: _animationFade),
-          new IconButton(icon: const Icon(Icons.list_alt), onPressed: _listAlt),
-          new IconButton(
-              icon: const Icon(Icons.confirmation_number), onPressed: _number)
+          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved)
         ],
       ),
       body: _buildSuggestions(),
-    );
-  }
-
-  // test route animation
-  void _number() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return MyHomePage(title: 'Flutter Demo Home Page');
-        },
-      ),
-    );
-  }
-
-  // test route animation
-  void _animationFade() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return MyFadeTest(title: 'Fade Demo');
-        },
-      ),
-    );
-  }
-
-  // test route animation
-  void _listAlt() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return SampleAppPage();
-        },
-      ),
-    );
-  }
-
-  // test route category
-  void _category() {
-    Navigator.of(context).push(
-      new MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return new Scaffold(
-            appBar: new AppBar(title: const Text('Category Page')),
-            body: const Center(
-                child: Text(
-                    "Test category page,\ncustom route,\ntext align center !!!",
-                    textAlign: TextAlign.center)),
-          );
-        },
-      ),
     );
   }
 
