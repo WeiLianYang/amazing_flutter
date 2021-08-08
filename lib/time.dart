@@ -13,6 +13,7 @@ class TimePage extends StatefulWidget {
 /// 获取当前时间动态展示
 class TimePageState extends State<TimePage> {
   String currentTime;
+  Timer _timer;
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class TimePageState extends State<TimePage> {
   void refreshTime() {
     const period = Duration(milliseconds: 1000);
     // 定时更新当前时间的 currentTimeStr 字符串
-    Timer.periodic(period, (timer) {
+    _timer = Timer.periodic(period, (timer) {
       setState(() {
         this.currentTime = getCurrentTime();
       });
@@ -63,5 +64,12 @@ class TimePageState extends State<TimePage> {
         ),
       ],
     );
+  }
+  
+  @override
+  void dispose() {
+    print("dispose: timer cancel");
+    _timer.cancel();
+    super.dispose();
   }
 }

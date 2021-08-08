@@ -1,4 +1,5 @@
 import 'package:amazing_flutter/sample_main.dart';
+import 'package:amazing_flutter/state_manage_provider.dart';
 import 'package:amazing_flutter/time.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,9 @@ class _ListWidgetState extends State<ListWidget> {
     _itemList.add(ListItemBean("divider", 0));
     _itemList.add(ListItemBean("sample 7: timer", 7));
     _itemList.add(ListItemBean("divider", 0));
-    _itemList.add(ListItemBean("sample 8: navigation bar", 8));
+    _itemList.add(ListItemBean("sample 8: state manage provider", 8));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 9: navigation bar", 9));
     _itemList.add(ListItemBean("divider", 0));
     return Scaffold(
         appBar: AppBar(title: const Text('Widget List')), body: _buildList());
@@ -137,6 +140,14 @@ class _ListWidgetState extends State<ListWidget> {
   void _sample8() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(builder: (BuildContext context) {
+        return NameStateWidget();
+      }),
+    );
+  }
+
+  void _sample9() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(builder: (BuildContext context) {
         return NavigationWidget();
       }),
     );
@@ -145,7 +156,7 @@ class _ListWidgetState extends State<ListWidget> {
   Widget _buildList() {
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
-        itemCount: 16,
+        itemCount: 18,
         itemBuilder: (context, index) {
           if (index.isOdd) return Divider();
           return _buildRow(_itemList[index]);
@@ -175,6 +186,8 @@ class _ListWidgetState extends State<ListWidget> {
           _sample7();
         } else if (itemBean.type == 8) {
           _sample8();
+        } else if (itemBean.type == 9) {
+          _sample9();
         }
       },
     );
