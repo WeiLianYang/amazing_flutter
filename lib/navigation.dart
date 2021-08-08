@@ -1,3 +1,4 @@
+import 'package:amazing_flutter/left_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class NavigationState extends State<NavigationWidget> {
       appBar: AppBar(
         title: Text('Navigation'),
       ),
+      drawer: LeftDrawer(),
       body: Stack(
         children: <Widget>[
           _getPagesWidget(0),
