@@ -1,4 +1,5 @@
 import 'package:amazing_flutter/left_drawer.dart';
+import 'package:amazing_flutter/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,14 @@ class NavigationState extends State<NavigationWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Navigation'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: SearchPageDelegate());
+            },
+          ),
+        ],
       ),
       drawer: LeftDrawer(),
       body: Stack(
