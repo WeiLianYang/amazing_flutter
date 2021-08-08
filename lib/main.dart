@@ -6,6 +6,7 @@ import 'TestStatefulWidget.dart';
 import 'animation.dart';
 import 'first_flutter_app.dart';
 import 'list_view.dart';
+import 'navigation.dart';
 
 void main() {
   runApp(MyApp());
@@ -56,6 +57,8 @@ class _ListWidgetState extends State<ListWidget> {
     _itemList.add(ListItemBean("sample 6: test lifecycle", 6));
     _itemList.add(ListItemBean("divider", 0));
     _itemList.add(ListItemBean("sample 7: timer", 7));
+    _itemList.add(ListItemBean("divider", 0));
+    _itemList.add(ListItemBean("sample 8: navigation bar", 8));
     _itemList.add(ListItemBean("divider", 0));
     return Scaffold(
         appBar: AppBar(title: const Text('Widget List')), body: _buildList());
@@ -131,10 +134,18 @@ class _ListWidgetState extends State<ListWidget> {
     );
   }
 
+  void _sample8() {
+    Navigator.of(context).push(
+      new MaterialPageRoute<void>(builder: (BuildContext context) {
+        return NavigationWidget();
+      }),
+    );
+  }
+
   Widget _buildList() {
     return ListView.builder(
         padding: EdgeInsets.all(16.0),
-        itemCount: 14,
+        itemCount: 16,
         itemBuilder: (context, index) {
           if (index.isOdd) return Divider();
           return _buildRow(_itemList[index]);
@@ -162,6 +173,8 @@ class _ListWidgetState extends State<ListWidget> {
           _sample6();
         } else if (itemBean.type == 7) {
           _sample7();
+        } else if (itemBean.type == 8) {
+          _sample8();
         }
       },
     );
