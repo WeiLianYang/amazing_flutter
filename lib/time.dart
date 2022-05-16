@@ -12,8 +12,8 @@ class TimePage extends StatefulWidget {
 
 /// 获取当前时间动态展示
 class TimePageState extends State<TimePage> {
-  String currentTime;
-  Timer _timer;
+  late String currentTime;
+  late Timer _timer;
 
   @override
   void initState() {

@@ -71,7 +71,7 @@ class SearchPageDelegate extends SearchDelegate {
         inputDecorationTheme: InputDecorationTheme(),
         primaryColor: theme.primaryColor,
         primaryIconTheme: theme.primaryIconTheme,
-        primaryColorBrightness: theme.primaryColorBrightness,
+        // primaryColorBrightness: theme.primaryColorBrightness,
         primaryTextTheme: theme.primaryTextTheme);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:amazing_flutter/left_drawer.dart';
 import 'package:amazing_flutter/search.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavigationWidget extends StatefulWidget {
@@ -39,17 +38,17 @@ class NavigationState extends State<NavigationWidget> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            title: Text('Recommend'),
+            label: 'Recommend',
             activeIcon: Icon(Icons.people_outline),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            title: Text('Favourite'),
+            label: 'Favourite',
             activeIcon: Icon(Icons.favorite_border),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text('Me'),
+            label: 'Me',
             activeIcon: Icon(Icons.person_outline),
           ),
         ],
